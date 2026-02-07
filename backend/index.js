@@ -16,7 +16,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://studmaneger-9qer9iu2m-rahul-mishra-s-projects-a6003996.vercel.app",
+      "https://studmaneger-ekex.vercel.app/",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
