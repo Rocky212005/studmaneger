@@ -12,15 +12,19 @@ const app = express();
 //middleware
 //app.use(cors());
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://your-frontend.vercel.app"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://studmaneger-9qer9iu2m-rahul-mishra-s-projects-a6003996.vercel.app",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+
+app.options("*", cors()); //
 
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
