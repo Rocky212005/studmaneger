@@ -172,9 +172,9 @@
 // }
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
+import API from "../api/axios"
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -184,11 +184,17 @@ export default function Home() {
   const fetchMaterials = async (subject = "") => {
     try {
       setLoading(true);
-      const res = await axios.get(
-        `http://localhost:5000/api/materials${
-          subject ? `?subject=${subject}` : ""
-        }`
-      );
+      // const res = await axios.get(
+      //   `http://localhost:5000/api/materials${
+      //     subject ? `?subject=${subject}` : ""
+      //   }`
+      // );
+
+      const res = await API.get(
+         `/materials${
+           subject ? `?subject=${subject}` : ""
+         }`
+       );
       setAllMaterials(res.data);
     } catch (err) {
       console.error(err);
@@ -208,7 +214,7 @@ export default function Home() {
 
   const handleDownload = (id) => {
     window.open(
-      `http://localhost:5000/api/materials/download/${id}`,
+      `https://studmaneger.onrender.com/api/materials/download/${id}`,
       "_blank"
     );
   };

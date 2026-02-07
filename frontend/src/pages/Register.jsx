@@ -107,8 +107,8 @@
 
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 
+import API from "../api/axios"
 export default function Register() {
   const navigate = useNavigate();
 
@@ -131,7 +131,8 @@ export default function Register() {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:5000/api/auth/register", formData);
+      // await axios.post("http://localhost:5000/api/auth/register", formData);
+      await API.post("/auth/register",formData);
       navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");

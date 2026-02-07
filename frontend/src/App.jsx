@@ -65,7 +65,6 @@ import UploadMaterial from "./pages/Upload";
 import MyDocuments from "./pages/MyDocuments";
 import Account from "./pages/AccountSetting";
 import PrivateRoute from "./components/PrivateRoute";
-import home from "./pages/Home";
 import Home from "./pages/Home";
 import Layout from "./layout/Layout";
 

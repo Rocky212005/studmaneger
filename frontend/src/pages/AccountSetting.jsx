@@ -316,7 +316,7 @@
 
 
 import { useState } from "react";
-import axios from "axios";
+import API from "../api/axios"
 
 export default function AccountSettings() {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -327,11 +327,12 @@ export default function AccountSettings() {
     email: storedUser?.email || "",
     course: storedUser?.course || "",
   });
+  const BASE_URL = "https://studmaneger.onrender.com/api".replace("/api", "");
 
   const [avatarFile, setAvatarFile] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(
     storedUser?.avatar
-      ? `http://localhost:5000/${storedUser.avatar}`
+      ? `${BASE_URL}/${storedUser.avatar}`
       : ""
   );
 
@@ -355,8 +356,8 @@ export default function AccountSettings() {
     data.append("avatar", avatarFile);
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/users/avatar",
+      const res = await API.post(
+        "/users/avatar",
         data,
         {
           headers: {
@@ -367,7 +368,7 @@ export default function AccountSettings() {
 
       const updatedUser = { ...storedUser, avatar: res.data.avatar };
       localStorage.setItem("user", JSON.stringify(updatedUser));
-      setAvatarPreview(`http://localhost:5000/${res.data.avatar}`);
+      setAvatarPreview(`${BASE_URL}/${res.data.avatar}`);
 
       alert("Profile photo updated ✅");
     } catch (err) {

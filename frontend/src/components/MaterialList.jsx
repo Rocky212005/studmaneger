@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../api/axios";
+const BASE_URL = "https://studmaneger.onrender.com/api".replace("/api", "");
 
 export default function MaterialList({ subject }) {
   const [materials, setMaterials] = useState([]);
@@ -9,6 +10,7 @@ export default function MaterialList({ subject }) {
       .then((res) => setMaterials(res.data))
       .catch(() => alert("Failed to load materials"));
   }, [subject]);
+  
 
   return (
     <div className="mt-6">
@@ -22,7 +24,7 @@ export default function MaterialList({ subject }) {
           >
             <span>{m.title}</span>
             <a
-              href={`http://localhost:5000/api/materials/download/${m._id}`}
+              href={`${BASE_URL}/materials/download/${m._id}`}
               target="_blank"
               rel="noreferrer"
               className="text-indigo-600 font-medium"

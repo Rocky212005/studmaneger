@@ -178,7 +178,7 @@
 
 
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../api/axios"
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 
@@ -195,8 +195,8 @@ export default function Dashboard() {
   const fetchMaterials = async (subject = "") => {
     try {
       setLoading(true);
-      const res = await axios.get(
-        `http://localhost:5000/api/materials${subject ? "?subject=" + subject : ""}`
+      const res = await API.get(
+        `/materials${subject ? "?subject=" + subject : ""}`
       );
       setMaterials(res.data);
       setSubjects([...new Set(res.data.map((m) => m.subject))]);
@@ -212,8 +212,8 @@ export default function Dashboard() {
   }, [selectedSubject]);
 
   const handleDownload = async (id) => {
-    const res = await axios.get(
-      `http://localhost:5000/api/materials/download/${id}`,
+    const res = await API.get(
+      `/materials/download/${id}`,
       { headers: { Authorization: `Bearer ${token}` }, responseType: "blob" }
     );
     const url = window.URL.createObjectURL(new Blob([res.data]));

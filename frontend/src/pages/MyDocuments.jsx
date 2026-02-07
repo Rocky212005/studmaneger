@@ -162,9 +162,9 @@
 
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
+import API from "../api/axios"
 
 export default function MyDocuments() {
   const token = localStorage.getItem("token");
@@ -183,7 +183,10 @@ export default function MyDocuments() {
   const fetchDocuments = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/documents", {
+      // const res = await axios.get("http://localhost:5000/api/documents", {
+      //   headers: { Authorization: `Bearer ${token}` },
+      // });
+      const res = await API.get("/documents", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDocuments(res.data);
@@ -207,8 +210,8 @@ export default function MyDocuments() {
     formData.append("title", title);
     formData.append("docType", docType);
 
-    await axios.post(
-      "http://localhost:5000/api/documents/upload",
+    await API.post(
+      "/documents/upload",
       formData,
       { headers: { Authorization: `Bearer ${token}` } }
     );

@@ -197,7 +197,8 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+
+import API from "../api/axios"
 
 export default function Login() {
   const navigate = useNavigate();
@@ -212,9 +213,13 @@ export default function Login() {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
-        password,
+      // const res = await axios.post("https://studmaneger.onrender.com/api/auth/login", {
+      //   email,
+      //   password,
+      // });
+      const res = await API.post("/auth/login", {
+         email,
+         password,
       });
 
       localStorage.setItem("token", res.data.token);
