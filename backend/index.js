@@ -24,7 +24,7 @@ app.use(
   })
 );
 
-app.options("*", cors()); //
+
 
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
